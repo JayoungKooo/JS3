@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+        // //Mock 서버
+        const url = "https://97589231-7e6c-4816-bc3f-722eb5992522.mock.pstmn.io/getData";
+
+        // var data = axios.get(url);
+        // console.log(data);
+
+        function getData() {
+            //그ㅡ냥 문법이 이러니까 외우기
+            return new Promise(function (resolve, reject) {
+                axios.get(url).then(function (response) {
+                    resolve(response.data); //resolve 데이터 받아옴
+                });
+            });
+        }
+
+        getData().then(function (jsonData) {
+            console.log(jsonData);
+        });
+
+        // //서버로부터 받아올때까지 약속,보장 해줄게 -> promise
+        // function getData() {
+        //     return new Promise(function (resolve, reject) { //데이터 받아오면 (resolve는 성공 reject는 실패)
+        //         axios.get(url).then(function (response) { //response라는 parameter로 넣어라
+        //             //resolve(response);
+        //             resolve(response.data); //전체 데이터불러온다
+
+        //         });
+        //     });
+        // }
+
+        // getData().then(function (kimdata) {
+        //     console.log(kimdata);
+        // });
+    </script>
+</body>
+
+</html>

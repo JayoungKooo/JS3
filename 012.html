@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+        const url = "https://97589231-7e6c-4816-bc3f-722eb5992522.mock.pstmn.io/";
+        //서버url
+
+        async function api(url) {
+            return (await axios.get(url)).data;
+        } //결과를 return할때까지 기다리겠따..
+
+        async function getData(path) {
+            var data = (await api(url + path));
+            console.log(path, data);
+        }
+        //async await 많이 사용함..
+        getData("getUserList")
+        getData("getData")
+
+
+
+
+
+        //fetch
+
+        fetch(url + "getUserList").then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            console.log(data);
+        });
+    </script>
+</body>
+
+</html>

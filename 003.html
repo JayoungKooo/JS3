@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //Default Function Parameter - 함수의 파라미터 기본 값
+        function say(message = "파라미터 안들어옴") {
+            console.log(message);
+        }
+        //say("파라미터 전달")
+        say("ㅇ"); //아무것도 없으면 "파라미터안들어옴"뜬다
+        //()안에 아무것도 안넣으면 에러나니까
+        //미입력시 디폴트값으로 뭐 들어갈지
+
+
+        //
+        function add(z1 = 1, z2 = 1) {
+            if (z1 != undefined && z2 != undefined) {
+
+                return z1 + z2;
+            }
+        }
+        console.log(add());
+    </script>
+</body>
+
+</html>
