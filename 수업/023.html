@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Document</title>
+    <style>
+        input {
+            width: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="tel" name="" id="" maxlength="3" onkeyup="myFunction('tel2', 3,event);">-
+    <!-- keyup이 일어날때마다 myfunction호출, 3자리 다 입력하고 나면 tel2로 넘어가라 그다음 현재일어나는 event객체를 줘 -->
+    <input type="tel" name="" id="tel2" maxlength="4" onkeyup="myFunction('tel3', 4,event);">-
+    <input type="tel" name="" id="tel3" maxlength="4">
+    <input type="search" name="" id="" onkeypress="checkEnter(event);">
+    <script>
+        //key 이벤트
+        //keydown
+        //keypress
+        //keyup
+        //1. keyup 키보드에서 손을 땠을 때 실행 
+        //2. keydown 키보드를 눌렀을 때 실행 키보드를 누르고 있을 때 한번만 실행됨 
+        //3. keypress 키보드를 눌렀을 때
+        function myFunction(id, len, e) {
+            if (e.target.value.length == len) {
+                //키 몇자리인지 계쏙 확인하다가 3자리 되는 순간
+                document.getElementById(id).focus();
+                //그 다음으로 포커스되어서 넘어가라.
+            }
+
+            // console.log(e.type);
+            // console.log(e.target.value);
+        }
+
+        function doSearch() {
+            console.log("조회 실행");
+        }
+
+        function checkEnter(e) {
+            console.log(e.keyCode);
+            if (e.keyCode == 13) {
+                //각 키보드마다 배정된 숫자값이 있다.
+                //enter키의 경우 값은 13
+                doSearch();
+                //사용자가 엔터누르는순간 dosearch 해라.
+            }
+        }
+    </script>
+</body>
+
+</html>
