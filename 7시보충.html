@@ -1,0 +1,113 @@
+DATE객체
+
+var d = new Date();
+var month = d.getMonth() 0부터 1월
+그래서 console.log(month+1)해줘야함
+
+month.toString().padStart(2,0)
+month 는 넘버객체라서...스트링객체로 변환한 후
+(그래야 패드스타트 사용할수 있음)두자리로 만들고 앞에 0채워줘
+
+d.getTime(); >>밀리세컨드 표시
+만약 결과가 1625047520257임
+
+var d2 = new Date(162504752025)
+console.log(d2)
+일케하면 지금 날짜시간 나옴.
+
+만약 3일 전하고싶으면
+162504752025 - (3*60*60*24*1000)
+
+function getIntervalDate(day) {
+var now = new Date();
+
+return new Date(now.getTime()+(60*60*24*1000*day))
+}
+console.log(getIntervalDate(-5));
+>>5일전 알 수 있음
+
+--------------------------------------------------------------
+return
+
+function add(n1,n2){
+return n1 + n2;
+} >>리턴 값이 sum이라는 함수로 들어가는 것..!
+var sum = add(3,5);
+console.log(add(3,5));
+
+리턴을 만나는 순간 함수는 종료된다. 그밑에 코드로 안감.
+
+--------------------------------------------------------------
+<!DOCTYPE html>
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="myFunction();">클릭</button>
+    <button id="btn">클릭2</button>
+
+    <select id="ab"></select>
+    <!-- 셀렉트는 옵션이랑 같이 간다. -->
+    <option value="a">a</option>
+    <option value="b">b</option>
+
+
+    <script>
+        //첫번째 방법
+        function myFunction() {
+            console.log("버튼 클릭-함수 호출")
+        }
+
+        //두번째 방법
+        document.getElementById("btn").addEventListener("click", myFunction);
+        //이벤트"클릭"에 귀를 귀울이고 클릭하면 마이펑션 실행할래
+        //>이 방법은 디자인이 바뀌어도 그대로 실행되니까 
+
+        document.getElementById("sel").addEventListener("change", myFunction);
+        //셀렉트 함수는 옵션 체인지할때도 실행가능
+    </script>
+</body>
+
+</html>
+--------------------------------------------------------------------------------------------
+<!DOCTYPE html>
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" name="txtABC" id="txt1" value=""><br>
+    <input type="text" name="txtABC" id="txt2" value=""><br>
+
+    <button onclick="getInputValue();">값 가져오기</button>
+    <button onclick="setInputValue();">값 넣어주기</button>
+    <button onclick="sum()">더하기</button>
+
+    <script>
+        //parseInt 하면 문자를 정수로 바꿔줌
+        //그 입력창에 숫자 입력해도 문자로 받아들여서
+        //덧셈하면 3+6하면 36나오니까...
+        function sum() {
+            var ele = document.getElementById("txt1");
+            var ele2 = document.getElementById("txt2");
+            console.log(parseFloat(ele.value) + parseFloat(ele2.value));
+        };
+
+
+        function getInputValue() {
+            var ele = document.getElementById("txt1");
+            console.log(ele.value); //>일케 .하고 원하는거 데려올수있음
+        }
+
+        function getInputValue() {
+            var ele = document.getElementById("txt1");
+            ele.value = "ABC"; //>이렇게 하면 value가 바뀜 abc로
+            ele.name = "abc"; //일케하면 name 바뀜
+        };
+    </script>
+</body>
+
+</html>

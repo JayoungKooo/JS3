@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let drinkList = [{
+                drinkId: "1",
+                drinkName: "코카콜라",
+                price: 700,
+                stock: 5
+            },
+            {
+                drinkId: "2",
+                drinkName: "오렌지주스",
+                price: 1200,
+                stock: 5
+            },
+            {
+                drinkId: "3",
+                drinkName: "커피",
+                price: 500,
+                stock: 5
+            },
+            {
+                drinkId: "4",
+                drinkName: "물",
+                price: 700,
+                stock: 5
+            },
+            {
+                drinkId: "5",
+                drinkName: "보리차",
+                price: 1200,
+                stock: 5
+            },
+            {
+                drinkId: "6",
+                drinkName: "포카리",
+                price: 1000,
+                stock: 5
+            },
+            {
+                drinkId: "7",
+                drinkName: "뽀로로",
+                price: 1300,
+                stock: 5
+            }
+        ];
+
+        //첫번째
+        for (var i = 0; i < drinkList.length; i++) {
+            if (drinkList[i].price <= 1000) {
+                console.log(drinkList[i]);
+            }
+        };
+
+        //두번째
+        for (var drink of drinkList) {
+            if (drinkList[i].price <= 1000) {
+                console.log(drinkList[i]);
+            }
+        };
+        ///>>근데 이거 i는 어디서 나온거지?
+
+
+        //세번째 필터사용 정석
+
+        var drinks = drinkList.filter(function (drink) { //drink라고 내맘대로 변수설정한후
+            //갖고오고싶은애는 true로 리턴해주게 해서
+            //필터가 false는 버리고 true만 모으게...
+
+            if (drink.price <= 1000) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+        console.log(drinks);
+
+        //필터사용 더 단순하게
+        var drinks = drinkList.filter(function (drink) {
+            // if (drink.price <= 1000) {
+            //     return true;
+            // } else {
+            //     return false;
+            // }
+            //>>이부분을 더 단순하게 한줄로 바꿀 수 있음
+            return drink.price <= 1000;
+            //drink.price<=1000 이거 자체가 true와 false값을 가지는거..
+            //그래서 return으로 그 값을 가져오는거..
+        });
+        console.log(drinks);
+
+        //화살표로 필터
+        var drinks = drinkList.filter((drink) => {
+            return drink.price <= 1000;
+        });
+
+        //더더 간단하게
+        var drinks = drinkList.filter((drink) => drink, price <= 1000);
+        console.log(drinks);
+    </script>
+</body>
+
+</html>

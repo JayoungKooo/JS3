@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" name="" id="txt1"><br>
+    <input type="text" name="" id="txt2"><br>
+
+    <p>ABC</p>
+    <p>DEF</p>
+
+    <label for="">
+        <input type="checkbox" name="chk_interest" id="" value="js">자바스크립트
+    </label>
+    <label for="">
+        <input type="checkbox" name="chk_interest" id="" value="html">HTML
+    </label>
+    <label for="">
+        <input type="checkbox" name="chk_interest" id="" value="css">CSS
+    </label>
+
+
+
+    <div style="margin-top: 20px;">
+
+        <!-- <button onclick="myFunction();">조회</button> -->
+        <button onclick="myFunction();" id="btnSave">저장</button>
+    </div>
+
+
+    <script>
+        function myFunction() {
+
+
+            // document.querySelector("#btnSave").disabled = true;
+            //버튼 한번 누르면 끝
+
+            setTimeout(function () {
+                document.querySelector("#btnSave").disabled = false;
+
+            }, 2000); //버튼 안되다가 2초뒤에 다시 풀림
+
+
+            var ele = document.getElementById("txt1")
+            //아이디를 가지고 요소를 가져와보겠따.
+            // console.log(ele)
+
+
+            var txtValue = ele.value;
+            console.log(txtValue);
+            //txt1 값 나옴
+
+
+            var ele2 = document.getElementById("txt2")
+            ele2.value = "가나다";
+            //두번째 칸에 자동으로 가나다 써져있고 시작.
+
+
+            var pTag = document.getElementsByTagName("p");
+            //elements니까 하나있어도 배열로 return해줌
+            //태그네임으로 가져오는거
+            console.log(pTag);
+
+
+            var chks = document.getElementsByName("chk_interest");
+            console.log(chks);
+            //같은 name들 배열로 반환해줌
+
+            //document.getElementsByClassName
+
+
+            for (var chk of chks) {
+                if (chk.checked) {
+                    console.log(chk.value);
+                }
+            }
+            //사용자가 어떤거(html,css,자바) 체크 했는지 알수있음.
+
+
+            //이건 다른방법. 체크되어있는것 이름 다 가져오는...
+            //추천
+            var checkedItems = document.querySelectorAll("[name=chk_interest]:checked");
+            for (var chk of checkedItems) {
+                console.log(chk.value);
+            }
+
+            var ele = document.querySelector("#txt1");
+            console.log(ele);
+            //아이디 선택자로 할땐 샵 붙여
+            //css selector 문법 그대로..시작할때 #붙이기. 앞에 
+            //attribute로 접근하면 쉽게쉽게 할수있다??뭔말이야
+
+
+            document.querySelectAll("p");
+            //태그네임에 해당하는거 다 가져옴?
+
+            document.querySelectorAll("[name=chk_interest]");
+            //요소이름으로 할때는 대괄호. 
+
+        }
+    </script>
+</body>
+
+</html>

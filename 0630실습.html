@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<head>
+    <title>document</title>
+    <style>
+        div.vm {
+            text-align: center;
+            position: relative;
+            width: 500px;
+            height: 600px;
+            border: 30px solid #ddff7e;
+            background-color: #42680e;
+        }
+
+        div.list {
+            position: relative;
+            margin: 40px;
+            width: 400px;
+            height: 150px;
+            border: 3px solid #73AD21;
+            background-color: aliceblue;
+            text-align: center;
+        }
+
+        div.help {
+            text-align: center;
+            margin: 40px;
+            width: 400px;
+            height: 100px;
+            border: 3px solid #73AD21;
+            background-color: white;
+            overflow-y: auto;
+        }
+
+        button {
+            margin: 15px;
+        }
+
+        button:hover {
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="vm">
+        <p style="color: white; font-family:Georgia, 'Times New Roman', Times, serif; font-size: 20pt;">vending machine
+        </p>
+        <div class="list">
+
+
+            <button onclick="requestDrink(1);" id="btnDrink1">코카콜라<br>700원</button>
+            <button onclick="requestDrink(2);" id="btnDrink2">오렌지주스<br>1200원</button>
+            <button onclick="requestDrink(3);" id="btnDrink3">커피<br>500원</button>
+            <button onclick="requestDrink(4);" id="btnDrink4">물<br>700원</button>
+            <button onclick="requestDrink(5);" id="btnDrink5">보리차<br>1200원</button>
+            <button onclick="requestDrink(6);" id="btnDrink6">포카리<br>1000원</button>
+            <button onclick="requestDrink(7);" id="btnDrink7">뽀로로<br>1300원</button>
+
+
+
+        </div>
+        <button onclick="inputAmount(100);">100원 투입</button>
+        <!-- amount라는 파라미터에 강제로 100부여한것,,! -->
+        <button onclick="inputAmount(500);">500원 투입</button>
+        <button onclick="inputAmount(1000);">1000원 투입</button>
+        <br>
+
+        <div class="help" id="help"></div>
+    </div>
+    <script>
+        let total_vm_amount = 1000;
+        let total_customer_amount = 10000;
+        let total_input_amount = 0;
+
+
+        let drinkList = [{
+                drinkID: "1",
+                name: "코카콜라",
+                price: "700",
+                stock: 5
+            },
+            {
+                drinkID: "2",
+                name: "오렌지주스",
+                price: "1200",
+                stock: 5
+            }, {
+                drinkID: "3",
+                name: "커피",
+                price: "500",
+                stock: 5
+            }, {
+                drinkID: "4",
+                name: "물",
+                price: "700",
+                stock: 5
+            }, {
+                drinkID: "5",
+                name: "보리차",
+                price: "1200",
+                stock: 5
+            }, {
+                drinkID: "6",
+                name: "포카리",
+                price: "1000",
+                stock: 5
+            },
+            {
+                drinkID: "7",
+                name: "뽀로로",
+                price: "1300",
+                stock: 5
+            },
+        ];
+
+
+
+
+
+
+
+        function inputAmount(amount) {
+            var help = document.getElementById("help");
+            // var amount = amount
+            //입력한 돈이 고객의 지갑에 있는 돈 보다 같거나 작은지 확인
+            if (amount <= total_customer_amount) {
+                //만일 작다면
+                // total_vm_amount에 투입한 amount 더하기
+                total_vm_amount += amount;
+                // total_customer_amount에서 투입한 amount 빼기
+                total_customer_amount -= amount;
+                // total_input_amount에 투입한 amount 더하기
+                total_input_amount += amount;
+                //beforeend 자식 노드의 마지막
+                help.insertAdjacentHTML("beforeend", `<p>총 투입된 금액은 ${total_input_amount}원 입니다.</p>`);
+            } else {
+                //만일 크다면
+                //선택한 투입금액은 내 지갑에 있는 돈보다 크므로 메세지 출력
+                help.insertAdjacentHTML("beforeend", "<p>당신이 가진 돈 보다 투입금액이 큽니다.</p>")
+            }
+        }
+
+
+
+
+
+        function requestDrink(ID) {
+            //음료 목록에서 현재 선택한 음료를 가져온다.
+            var drink = drinkList.filter(d => d.drinkID == ID)[0];
+            //>>배열 형태로 받아왔기때문에 첫번째 인덱스 [0]을 가져오도록 한것.
+
+            //만일 선택한 음료의 재고가 남아있다면
+            if (drink.stock > 0) {
+                //  만약 총 투입 금액이 음료의 가격보다 같거나 크다면?
+                if (total_input_amount >= drink.price) {
+                    //  음료를 구매하고 돌려줘야하는 잔돈이 얼마인지 계산
+                    var coin = total_input_amount - drink.price;
+
+                    //만일 음료 자판기에 있는 잔돈이 음료를 구매하고 돌려줘야 하는 돈보다 같거나 크다면?
+                    if (coin <= total_vm_amount) {
+
+                        help.insertAdjacentHTML("beforeend", `<p>${drink.name}의 가격은 ${drink.price}원 입니다.</p>`);
+                        help.insertAdjacentHTML("beforeend", `<p>거스름돈은 ${coin}원 입니다.</p>`);
+                        //  고객의 지갑에서 음료를 구매하고 돌려받을 잔돈만큼 더하기
+                        total_customer_amount = total_customer_amount + coin;
+                        //  선택한 음료의 재고 수량에서 1 빼기
+                        drink.stock -= 1;
+                        //  총 투입 금액0으로 초기화
+                        total_input_amount = 0;
+                        //  자판기 총 잔돈에서 돌려줘야 하는 잔돈만큼 빼기
+                        total_vm_amount -= coin;
+                    } else {
+                        help.insertAdjacentHTML("beforeend", `<p>자판기 내 잔돈이 부족합니다.</p>`);
+                    }
+                } else {
+                    help.insertAdjacentHTML("beforeend", `<p>투입금액이 부족합니다.</p>`);
+                }
+            } else {
+                help.insertAdjacentHTML("beforeend", `<p>음료의 재고가 부족합니다.</p>`);
+
+
+            }
+        };
+    </script>
+</body>
+
+</html>
